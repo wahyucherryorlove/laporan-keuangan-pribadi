@@ -1,0 +1,109 @@
+@import url("../../fonts/poppins.css");
+@import url("../../fonts/source-sans-pro-700.css");
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    transition: all .5s ease-in-out;
+    transform: translateX(0%);
+}
+
+.sidebar.show {
+    transform: translateX(0%);
+}
+
+.sidebar .nav-item.active {
+    background-color: #323232;
+}
+
+.sidebar .nav-item:hover {
+    background-color: #525252;
+}
+
+.toggle-close {
+    position: absolute;
+    right: 5px;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.toggle-close::after {
+    content: "";
+    background-repeat: repeat;
+}
+
+.sidebar .icon-offcanvas-body {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #212529;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: aqua;
+}
+
+.overflow-md-auto::-webkit-scrollbar {
+    /* width: 0px; */
+    height: 5px;
+}
+
+.overflow-md-auto::-webkit-scrollbar-thumb {
+    /* width: 0px; */
+    height: 5px;
+    background-color: rgb(193, 9, 9);
+}
+
+.sidebar .icon-offcanvas-body::after {
+    content: "";
+    width: 3px;
+    border-bottom: 20px solid transparent;
+    border-top: 20px solid transparent;
+    border-right: 20px solid #212529;
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+.sidebar .nav-item.active > .icon-offcanvas-body {
+    display: block;
+}
+
+.containers {
+    margin: 90px 20px 0px 280px;
+}
+
+.form-label, .form-control {
+    font-family: "Source Sans Pro";
+}
+
+#opsi-bulan {
+    width: 50%;
+}
+
+@media (max-width: 992px) {
+    .containers {
+        margin-left: 20px;
+    }
+
+    .offcanvas-backdrop {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+}
+
+@media (max-width: 578px) {
+    #opsi-bulan {
+        width: 100%;
+    }
+}
