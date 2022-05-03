@@ -127,6 +127,7 @@ if (isset($_GET['delete'])) {
                 <?php if (($_SESSION['roles'] === "Administrasi") || ($_SESSION['roles'] === "Petugas")) : ?>
                     <div class="card-header d-sm-flex align-items-center justify-content-between">
                         <a class="btn btn-success d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#modal">Tambah Data</a>
+                        <div id="waktu" class="btn btn-primary px-2 rounded-pill btn-sm"></div>
                     </div>
                 <?php endif; ?>
                 <div class="card-body">
@@ -151,12 +152,12 @@ if (isset($_GET['delete'])) {
                                 ?>
                                     <tr>
                                         <td><?= $i++; ?></td>
-                                        <td><?= date("D") ?>, <?= date("d M Y"), strtotime($item['tanggal'] . "Days") ?></td>
-                                        <td class="text-start">Rp. <?= $item['dana'] ?></td>
-                                        <td class="text-start"><?= $item['keterangan'] ?></td>
+                                        <td><?= date("l", strtotime($item['hari'])) ?>, <?= date("d F Y", strtotime($item['tanggal'])) ?></td>
+                                        <td class="text-start" style="width: 200px;">Rp. <?= $item['dana'] ?></td>
+                                        <td class="text-start" style="width: 300px;"><?= $item['keterangan'] ?></td>
                                         <?php if (($_SESSION['roles'] === "Administrasi") || ($_SESSION['roles'] === "Petugas")) : ?>
                                             <td>
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#edit<?= $item['id'] ?>" class="btn btn-sm btn-warning">Edit</a> || <a data-href="data-pemasukan.php?delete=<?= $item['id']; ?>" id="delete" class="delete btn-sm btn-danger btn">Delete</a>
+                                            <a href="cetak-per-pemasukan.php?id=<?= $item['id'] ?>" class="btn btn-sm btn-info">Cetak</a> || <a href="#" data-bs-toggle="modal" data-bs-target="#edit<?= $item['id'] ?>" class="btn btn-sm btn-warning">Edit</a> || <a data-href="data-pemasukan.php?delete=<?= $item['id']; ?>" id="delete" class="delete btn-sm btn-danger btn">Delete</a>
                                             </td>
                                         <?php endif; ?>
                                     </tr>
@@ -173,8 +174,9 @@ if (isset($_GET['delete'])) {
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
+
+                    <a href="pemasukan-cetak.php" class="btn btn-info mt-4 btn-sm">Cetak Data</a>
                 </div>
             </div>
         </div>
@@ -226,7 +228,7 @@ if (isset($_GET['delete'])) {
                         <div class="mb-2">
                             <label for="" class="form-label">Hari / Tanggal</label>
                             <input type="hidden" name="id" value="<?= $item['id'] ?>" readonly>
-                            <input class="form-control disabled" value="<?= date("D") ?>, <?= date("d M Y"), strtotime($item['tanggal'] . "Days") ?>" readonly>
+                            <input class="form-control disabled" value="<?= date("l", strtotime($item['hari'])) ?>, <?= date("d F Y", strtotime($item['tanggal'])) ?>" readonly>
                         </div>
                         <div class="mb-2">
                             <label for="" class="form-label">Dana Pemasukan</label>
@@ -275,4 +277,48 @@ if (isset($_GET['delete'])) {
         });
         // Delete Data End
     });
+</script>
+
+<script type="text/javascript">
+    var tempat = <?= date_default_timezone_set('Asia/Makassar'); ?>;
+    var detik = <?= date('s'); ?>;
+    var menit = <?= date('i'); ?>;
+    var jam   = <?= date('H'); ?>;
+     
+    function clock()
+    {
+        if (detik!=0 && detik%60==0) {
+            menit++;
+            detik=0;
+        }
+        second = detik;
+         
+        if (menit!=0 && menit%60==0) {
+            jam++;
+            menit=0;
+        }
+        minute = menit;
+         
+        if (jam!=0 && jam%24==0) {
+            jam=0;
+        }
+        hour = jam;
+         
+        if (detik<10){
+            second='0'+detik;
+        }
+        if (menit<10){
+            minute='0'+menit;
+        }
+         
+        if (jam<10){
+            hour='0'+jam;
+        }
+        waktu = hour+':'+minute+':'+second;
+         
+        document.getElementById("waktu").innerHTML = waktu;
+        detik++;
+    }
+ 
+    setInterval(clock,1000);
 </script>

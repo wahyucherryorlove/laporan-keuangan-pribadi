@@ -117,6 +117,10 @@ $result = $query->fetch_assoc();
                 <a href="data-pengeluaran.php" class="py-2 text-light d-flex text-decoration-none navbar-link"><img src="../public/icons/negatif.svg" class="me-2" alt="Pengeluaran"> <span>Pengeluaran Dana</span></a>
                 <div class="icon-offcanvas-body"></div>
             </li>
+            <li class="nav-item ps-3 position-relative <?php if ($page === "Laporan") echo 'active'; ?>">
+                <a href="laporan.php" class="py-2 text-light d-flex text-decoration-none navbar-link"><img src="../public/icons/journal.svg" class="me-2" alt="Laporan"> <span>Laporan Dana</span></a>
+                <div class="icon-offcanvas-body"></div>
+            </li>
             <?php if ($_SESSION['roles'] === "Administrasi") : ?>
                 <li class="nav-item ps-3 position-relative <?php if ($page === "managementUser") echo 'active'; ?>">
                     <a href="management-user.php" class="py-2 text-light d-flex text-decoration-none navbar-link"><img src="../public/icons/people-fill.svg" class="me-2" alt="Laporan"> <span>User Registration</span></a>
